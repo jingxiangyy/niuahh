@@ -1,0 +1,24 @@
+const TronWeb = require('tronweb');
+
+// 连接到 TRON 节点
+const tronWeb = new TronWeb({
+    fullHost: 'https://api.trongrid.io', // 连接到 TRON 网络的节点
+    solidityNode: 'https://api.trongrid.io', // Solidity 节点
+    eventServer: 'https://api.trongrid.io', // Event 服务
+});
+
+// 要查询余额的账户地址
+const addressToCheck = 'TRX_Address';
+
+// 查询账户余额
+async function getBalance() {
+    try {
+        const balance = await tronWeb.trx.getBalance(addressToCheck);
+        console.log('Balance:', balance / 1e6, 'TRX'); // TRX 余额以 SUN 为单位，1 TRX = 1,000,000 SUN
+    } catch (error) {
+        console.error('Error occurred:', error);
+    }
+}
+
+// 调用查询余额函数
+getBalance();
